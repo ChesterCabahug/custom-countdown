@@ -60,10 +60,16 @@ updateCountdown = (e) => {
     countdownDate = e.srcElement[1].value
     console.log(countdownTitle)
     console.log(countdownDate)
-    // get the number version of current date
+    // check for valid date
+    if (countdownDate === "") {
+        alert("please select the date for countdown")
+    } else {
+         // get the number version of current date
     countdownValue = new Date(countdownDate).getTime()
     console.log("countdownValue" ,countdownValue)
     updateDom()
+    }
+
 }
 
 // reset all values
