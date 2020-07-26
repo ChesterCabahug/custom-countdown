@@ -29,7 +29,7 @@ dateEl.setAttribute("min", today)
 
 
 // populate countdown and complete ui
-updateDom = () => {
+updateDOM = () => {
     countdownActive = setInterval(() => {
         const now = new Date().getTime()
         const distance = countdownValue - now
@@ -74,7 +74,6 @@ updateCountdown = (e) => {
         title: countdownTitle,
         date: countdownDate,
     }
-    console.log(savedCountdown)
 
     localStorage.setItem("countdown", JSON.stringify(savedCountdown))
     // check for valid date
@@ -82,8 +81,8 @@ updateCountdown = (e) => {
         alert("please select the date for countdown")
     } else {
          // get the number version of current date
-    countdownValue = new Date(countdownDate).getTime()
-    updateDom()
+        countdownValue = new Date(countdownDate).getTime()
+        updateDOM()
     }
 
 }
@@ -103,7 +102,24 @@ reset = () => {
     countdownDate = ""
 }
 
+restorePreviousCountdown = () => {
+    // get countdown from local storage if available
+    if(localStorage.getItem("countdown")) {
+        inputContainer.hidden = true
+        savedCountdown = JSON.parse(localStorage.getItem("countdown"))
+        countdownTitle = savedCountdown.title
+        countdownDate = savedCountdown.date
+        countdownValue = new Date(countdownDate).getTime()
+        updateDOM()
+    }
+}
+
+
 // event listener
 countdownForm.addEventListener("submit", updateCountdown)
 countdownButton.addEventListener("click", reset)
 completeBtn.addEventListener("click", reset)
+
+
+// on load, check localStorage
+restorePreviousCountdown()
