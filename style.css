@@ -130,6 +130,33 @@ li span {
   top: 60px;
 }
 
+.complete-title {
+  animation: complete 4s infinite;
+}
+
+@keyframes complete {
+  0% {
+    color: rgb(235, 38, 38);
+  }
+
+  25% {
+    color: rgb(215, 235, 38);
+  }
+
+  50% {
+    color: rgb(38, 235, 38);
+    transform: scale(1.5);
+  }
+
+  75% {
+    color: rgb(38, 163, 235);
+  }
+
+  100% {
+    color: rgb(97, 38, 235);
+  }
+}
+
 
 /* Media Query: Large Smartphone (Vertical) */
 @media screen and (max-width: 600px) {
