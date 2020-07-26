@@ -7,6 +7,10 @@ const countdownElTitle = document.getElementById("countdown-title")
 const countdownButton = document.getElementById("countdown-button")
 const timeElements = document.querySelectorAll("span")
 
+const completeEl = document.getElementById("complete")
+const completeElInfo = document.getElementById("complete-info")
+const completeBtn = document.getElementById("complete-button")
+
 
 let countdownTitle = ""
 let countdownDate = ""
@@ -35,25 +39,34 @@ updateDom = () => {
         const minutes = Math.floor((distance % hour) / minute)
         const seconds = Math.floor((distance % minute) / second)
 
-        console.log(days, hours, minutes, seconds)
-
-        // populate our countdown
-        countdownElTitle.textContent = `${countdownTitle}`
-        timeElements[0].textContent = `${days}`
-        timeElements[1].textContent = `${hours}`
-        timeElements[2].textContent = `${minutes}`
-        timeElements[3].textContent = `${seconds}`
-
         // hide input
         inputContainer.hidden = true
+        console.log(days, hours, minutes, seconds)
 
-        // show countdown
-        countdownEl.hidden = false
+        // if the timer has ended , show complete
+        if (distance < 0) {
+            countdownEl.hidden = true
+            clearInterval(countdownActive)
+            completeElInfo.textContent = `${countdownTitle} finished on ${countdownDate}`
+            completeEl.hidden = false
+            
+        } else {
+            // show the countdown in progress
+            // populate our countdown
+            countdownElTitle.textContent = `${countdownTitle}`
+            timeElements[0].textContent = `${days}`
+            timeElements[1].textContent = `${hours}`
+            timeElements[2].textContent = `${minutes}`
+            timeElements[3].textContent = `${seconds}`
+            completeEl.hidden = true
+            countdownEl.hidden = false
+
+        }    
     }, second)
 }
 
 
-// take values forom form input
+// take values from form input
 updateCountdown = (e) => {
     e.preventDefault()
     countdownTitle = e.srcElement[0].value
