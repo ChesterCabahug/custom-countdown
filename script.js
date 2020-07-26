@@ -34,6 +34,21 @@ updateDom = () => {
     const seconds = Math.floor((distance % minute) / second)
 
     console.log(days, hours, minutes, seconds)
+
+    // populate our countdown
+    countdownElTitle.textContent = `${countdownTitle}`
+    timeElements[0].textContent = `${days}`
+    timeElements[1].textContent = `${hours}`
+    timeElements[2].textContent = `${minutes}`
+    timeElements[3].textContent = `${seconds}`
+
+    // hide input
+    inputContainer.hidden = true
+
+    // show countdown
+    countdownEl.hidden = false
+
+
 }
 
 
