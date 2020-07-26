@@ -16,6 +16,7 @@ let countdownTitle = ""
 let countdownDate = ""
 let countdownValue = Date
 let countdownActive
+let savedCountdown
 
 const second = 1000
 const minute = second * 60
@@ -32,7 +33,6 @@ updateDom = () => {
     countdownActive = setInterval(() => {
         const now = new Date().getTime()
         const distance = countdownValue - now
-        console.log("distance", distance)
 
         const days = Math.floor(distance / day)
         const hours = Math.floor((distance % day) / hour)
@@ -41,7 +41,6 @@ updateDom = () => {
 
         // hide input
         inputContainer.hidden = true
-        console.log(days, hours, minutes, seconds)
 
         // if the timer has ended , show complete
         if (distance < 0) {
@@ -71,15 +70,19 @@ updateCountdown = (e) => {
     e.preventDefault()
     countdownTitle = e.srcElement[0].value
     countdownDate = e.srcElement[1].value
-    console.log(countdownTitle)
-    console.log(countdownDate)
+    savedCountdown = {
+        title: countdownTitle,
+        date: countdownDate,
+    }
+    console.log(savedCountdown)
+
+    localStorage.setItem("countdown", JSON.stringify(savedCountdown))
     // check for valid date
     if (countdownDate === "") {
         alert("please select the date for countdown")
     } else {
          // get the number version of current date
     countdownValue = new Date(countdownDate).getTime()
-    console.log("countdownValue" ,countdownValue)
     updateDom()
     }
 
