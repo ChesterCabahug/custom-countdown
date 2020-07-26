@@ -100,6 +100,7 @@ reset = () => {
     // explicitly reset values for countdown title
     countdownTitle = ""
     countdownDate = ""
+    localStorage.removeItem("countdown")
 }
 
 restorePreviousCountdown = () => {
