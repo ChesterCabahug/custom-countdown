@@ -66,5 +66,20 @@ updateCountdown = (e) => {
     updateDom()
 }
 
+// reset all values
+reset = () => {
+    // hide countdowns and show inputs
+    countdownEl.hidden = true
+    inputContainer.hidden = false
+
+    // stop the countdown
+    clearInterval(countdownActive)
+
+    // explicitly reset values for countdown title
+    countdownTitle = ""
+    countdownDate = ""
+}
+
 // event listener
 countdownForm.addEventListener("submit", updateCountdown)
+countdownButton.addEventListener("click", reset)
